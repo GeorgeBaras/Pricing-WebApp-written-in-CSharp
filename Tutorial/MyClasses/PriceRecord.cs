@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tutorial.MyClasses
 {
-    interface PriceRecord
+    public interface PriceRecord
     {
         String getLookupCode();
         List<PriceBand> getPriceRecord();

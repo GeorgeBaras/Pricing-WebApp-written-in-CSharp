@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tutorial.MyClasses
 {
-    interface PriceBand
+    public interface PriceBand
     {
         int getMileage();
         Decimal getValuation();

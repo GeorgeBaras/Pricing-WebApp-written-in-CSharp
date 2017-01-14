@@ -8,5 +8,6 @@ namespace Tutorial.MyClasses
 {
     interface ValuationCalculator
     {
+        Decimal calculate(PriceRecord priceRecord, int currentMileage);
     }
 }
