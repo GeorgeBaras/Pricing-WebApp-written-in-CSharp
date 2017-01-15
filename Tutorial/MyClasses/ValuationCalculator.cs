@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tutorial.MyClasses
 {
-    interface ValuationCalculator
+    public interface ValuationCalculator
     {
         Decimal calculate(PriceRecord priceRecord, int currentMileage);
     }

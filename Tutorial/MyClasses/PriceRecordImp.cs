@@ -26,7 +26,7 @@ namespace Tutorial.MyClasses
             return this.lookupCode;
         }
 
-        List<PriceBand> PriceRecord.getPriceRecord()
+        public List<PriceBand> getPriceBands()
         {
             return this.priceBands;
         }
