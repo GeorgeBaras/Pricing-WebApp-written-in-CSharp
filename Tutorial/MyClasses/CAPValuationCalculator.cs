@@ -33,17 +33,17 @@ namespace Tutorial.MyClasses
             }
         }
 
-        private decimal calculatePriceFromBand(PriceBand closestPriceBand, int currentMileage) {
-            if (currentMileage > closestPriceBand.getMileage())
+        protected decimal calculatePriceFromBand(PriceBand closestPriceBand, int currentMileage) {
+            if (currentMileage < closestPriceBand.getMileage())
             {
-                return adjustPriceUp(closestPriceBand.getValuation(), currentMileage - closestPriceBand.getMileage());
+                return adjustPriceUp(closestPriceBand.getValuation(), Math.Abs(currentMileage - closestPriceBand.getMileage()));
             }
             else {
-                return adjustPriceDown(closestPriceBand.getValuation(), closestPriceBand.getMileage() - currentMileage);
+                return adjustPriceDown(closestPriceBand.getValuation(), Math.Abs(currentMileage - closestPriceBand.getMileage()));
             }
         }
 
-        private decimal adjustPriceUp(decimal valuation, int mileageAdjustment ) {
+        protected decimal adjustPriceUp(decimal valuation, int mileageAdjustment ) {
             for (int i = 0; i < mileageAdjustment; i++)
             {
                 valuation = valuation + (Decimal.Multiply(valuation, ADJUSTMENT_PERCENTAGE));
@@ -51,7 +51,7 @@ namespace Tutorial.MyClasses
             return valuation;
         }
 
-        private decimal adjustPriceDown(decimal valuation, int mileageAdjustment)
+        protected decimal adjustPriceDown(decimal valuation, int mileageAdjustment)
         {
             for (int i=0; i<mileageAdjustment; i++)
             {
@@ -60,16 +60,16 @@ namespace Tutorial.MyClasses
             return valuation;
         }
 
-        private decimal calculatePriceBetweenTwoBands(PriceBand bandBelow, PriceBand bandAbove, int currentMileage)
+        protected decimal calculatePriceBetweenTwoBands(PriceBand bandBelow, PriceBand bandAbove, int currentMileage)
         {
             int mileageDifferenceBetweenBands = bandAbove.getMileage() - bandBelow.getMileage();
             decimal priceDifferenceBetweenBands = bandBelow.getValuation() - bandAbove.getValuation();
             decimal priceAdjustment = priceDifferenceBetweenBands / mileageDifferenceBetweenBands;
-            decimal finalValuation = ((currentMileage - bandBelow.getMileage()) * priceAdjustment) + bandBelow.getValuation();
+            decimal finalValuation = bandBelow.getValuation() - ((currentMileage - bandBelow.getMileage()) * priceAdjustment);
             return finalValuation;
         }
 
-        private PriceBand findClosestBandBelowMileage(PriceRecord priceRecord, int currentMileage) {
+        protected PriceBand findClosestBandBelowMileage(PriceRecord priceRecord, int currentMileage) {
             List<PriceBand> priceBandsInReverse = priceRecord.getPriceBands();
             priceBandsInReverse.Reverse();
             foreach (PriceBand priceBand in priceBandsInReverse)
@@ -82,7 +82,7 @@ namespace Tutorial.MyClasses
             return null;
         }
 
-        private PriceBand findClosestBandAboveMileage(PriceRecord priceRecord, int currentMileage)
+        protected PriceBand findClosestBandAboveMileage(PriceRecord priceRecord, int currentMileage)
         {
             foreach (PriceBand priceBand in priceRecord.getPriceBands())
             {
@@ -94,14 +94,14 @@ namespace Tutorial.MyClasses
             return null;
         }
 
-        private bool isBetweenPriceBands(PriceRecord priceRecord, int currentMileage) {
-            if (currentMileage > priceRecord.getPriceBands().First().getValuation() && currentMileage < priceRecord.getPriceBands().Last().getValuation()) {
+        protected bool isBetweenPriceBands(PriceRecord priceRecord, int currentMileage) {
+            if (currentMileage > priceRecord.getPriceBands().First().getMileage() && currentMileage < priceRecord.getPriceBands().Last().getMileage()) {
                 return true;
             }
             return false;
         }
 
-        private PriceBand findExactPriceBand(PriceRecord priceRecord, int currentMileage) {
+        protected PriceBand findExactPriceBand(PriceRecord priceRecord, int currentMileage) {
             foreach (PriceBand priceBand in priceRecord.getPriceBands())
             {
                 if (priceBand.getMileage().Equals(currentMileage)){
