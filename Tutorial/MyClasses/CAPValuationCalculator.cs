@@ -7,7 +7,7 @@ namespace Tutorial.MyClasses
 {
     public class CAPValuationCalculator : ValuationCalculator
     {
-        public const decimal ADJUSTMENT_PERCENTAGE = 0.003m;
+        public static readonly decimal ADJUSTMENT_PERCENTAGE = 0.003m;
 
         public decimal calculate(PriceRecord priceRecord, int currentMileage)
         {
