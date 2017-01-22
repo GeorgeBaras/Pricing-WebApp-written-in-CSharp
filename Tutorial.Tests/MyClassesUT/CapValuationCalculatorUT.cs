@@ -8,6 +8,24 @@ namespace Tutorial.Tests.MyClassesUT
     [TestClass]
     public class CapValuationCalculatorUT
     {
+        private TestContext testContextInstance;
+
+        /// <summary>
+        ///Gets or sets the test context which provides
+        ///information about and functionality for the current test run.
+        ///</summary>
+        public TestContext TestContext
+        {
+            get
+            {
+                return testContextInstance;
+            }
+            set
+            {
+                testContextInstance = value;
+            }
+        }
+
         static PriceBand lowBand;
         static PriceBand midBand;
         static PriceBand highBand;
@@ -21,7 +39,7 @@ namespace Tutorial.Tests.MyClassesUT
 
 
         [ClassInitialize]
-        public static void Setup(TestContext context) {
+        public static void Setup(TestContext testContextInstance) {
             lowBand = new PriceBandImp(10, new decimal(20000.0));
             midBand = new PriceBandImp(15, new decimal(15000.0));
             highBand = new PriceBandImp(20, new decimal(10000.0));
