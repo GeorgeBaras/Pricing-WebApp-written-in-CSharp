@@ -7,9 +7,16 @@ namespace Tutorial.MyClasses
 {
     public class ValuationServiceImp : ValuationService
     {
-        private ValuationDAO valuationDAO;
-        private ValuationCalculator valuationCalculator;
+        public ValuationDAO valuationDAO;
+        public ValuationCalculator valuationCalculator;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public ValuationServiceImp() { }
+
+        public ValuationServiceImp(ValuationDAO valuationDAO, ValuationCalculator valuationCalculator) {
+            this.ValuationDAO = valuationDAO;
+            this.ValuationCalculator = valuationCalculator;
+        }
 
         public decimal valueVehicle(Vehicle vehicle)
         {

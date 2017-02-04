@@ -28,5 +28,10 @@ namespace Tutorial.MyClasses
         {
             this.priceRecordsList.Add(priceRecord);
         }
+
+        public String isOfType()
+        {
+            return "ValuationDAOListImp";
+        }
     }
 }

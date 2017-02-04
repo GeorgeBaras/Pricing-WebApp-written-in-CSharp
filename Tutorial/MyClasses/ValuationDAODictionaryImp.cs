@@ -27,5 +27,9 @@ namespace Tutorial.MyClasses
         public void addPriceRecord(PriceRecord priceRecord) {
             this.priceRecordsDictionary.Add(priceRecord.getLookupCode(), priceRecord);
         }
+
+        public String isOfType() {
+            return "ValuationDAODictionaryImp";
+        }
 }
 }
