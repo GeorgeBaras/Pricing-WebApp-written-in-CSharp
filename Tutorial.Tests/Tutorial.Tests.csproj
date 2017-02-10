@@ -126,9 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClassesUT\CapValuationCalculatorUT.cs" />
-    <Compile Include="MyClassesUT\ValuationServiceIntegrationTest.cs" />
+    <Compile Include="IntegrationTest\ValuationServiceIntegrationTest.cs" />
     <Compile Include="MyClassesUT\ValuationDaoUT.cs" />
-    <Compile Include="MyClassesUT\ValuationServiceTest.cs" />
+    <Compile Include="IntegrationTest\ValuationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
