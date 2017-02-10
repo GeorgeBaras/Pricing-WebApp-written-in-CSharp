@@ -7,9 +7,7 @@ using Moq;
 
 namespace Tutorial.Tests.MyClassesUT
 {
-    /// <summary>
-    /// Summary description for ValuationServiceTest
-    /// </summary>
+
     [TestClass]
     public class ValuationServiceTest
     {

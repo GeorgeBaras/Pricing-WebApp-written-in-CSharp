@@ -7,8 +7,8 @@ namespace Tutorial.MyClasses
 {
     public class PriceBandImp : PriceBand
     {
-        private int mileage;
-        private decimal valuation;
+        public virtual int mileage { get; set; }
+        public virtual decimal valuation{ get; set; }
 
         public PriceBandImp(int mileage, decimal valuation) {
             this.mileage = mileage;
