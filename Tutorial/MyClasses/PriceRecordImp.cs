@@ -7,8 +7,8 @@ namespace Tutorial.MyClasses
 {
     public class PriceRecordImp : PriceRecord
     {
-        public virtual String lookupCode { get; set; }
-        public virtual List<PriceBand> priceBands { get; set; }
+        private String lookupCode;
+        public List<PriceBand> priceBands;
 
         public PriceRecordImp(String lookupCode, List<PriceBand> priceBands) {
             this.lookupCode = lookupCode;
