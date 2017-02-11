@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,99 +8,23 @@ namespace Tutorial.MyClasses
 {
     public class Vehicle
     {
-        private String make;
-        private String model;
-        private String derivative;
-        private String lookupCode;
-        private int mileage;
-        private decimal value;
+        public int id { get; set; }
+        public String make { get; set; }
+        public String model { get; set; }
+        public String derivative { get; set; }
+        public String lookupCode { get; set; }
+        public int mileage { get; set; }
+        public decimal value { get; set; }
 
+        public Vehicle() { }
         public Vehicle(String make, String model, String derivative, String lookupCode, int mileage, decimal value)
         {
-            this.Make = make;
-            this.Model = model;
-            this.Derivative = derivative;
-            this.LookupCode = lookupCode;
-            this.Mileage = mileage;
-            this.Value = value;
-        }
-
-        public string Make
-        {
-            get
-            {
-                return make;
-            }
-
-            set
-            {
-                make = value;
-            }
-        }
-
-        public string Model
-        {
-            get
-            {
-                return model;
-            }
-
-            set
-            {
-                model = value;
-            }
-        }
-
-        public string Derivative
-        {
-            get
-            {
-                return derivative;
-            }
-
-            set
-            {
-                derivative = value;
-            }
-        }
-
-        public string LookupCode
-        {
-            get
-            {
-                return lookupCode;
-            }
-
-            set
-            {
-                lookupCode = value;
-            }
-        }
-
-        public int Mileage
-        {
-            get
-            {
-                return mileage;
-            }
-
-            set
-            {
-                mileage = value;
-            }
-        }
-
-        public decimal Value
-        {
-            get
-            {
-                return value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
+            this.make = make;
+            this.model = model;
+            this.derivative = derivative;
+            this.lookupCode = lookupCode;
+            this.mileage = mileage;
+            this.value = value;
         }
 
         
