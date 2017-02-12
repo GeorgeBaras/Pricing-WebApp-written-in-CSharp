@@ -1,8 +1,10 @@
 ﻿using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Tutorial.EF_DBContext;
 
 namespace Tutorial.MyClasses
 {
@@ -61,7 +63,8 @@ namespace Tutorial.MyClasses
                 myUnityContainer.Resolve<ValuationCalculator>("CapValuationCalculator")
                 ));
 
-
+            // MyApplicationDBContext
+            myUnityContainer.RegisterType<DbContext, MyApplicationDBContext>("applicationDBContext");
 
         }
 

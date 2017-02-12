@@ -9,8 +9,6 @@ namespace Tutorial.MyClasses
     public interface PriceRecord
     {
         String getLookupCode();
-
-        ICollection<PriceBand> getPriceBands();
-       // List<PriceBand> getPriceBands();
+        List<PriceBand> getPriceBands();
     }
 }
