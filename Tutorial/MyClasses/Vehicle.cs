@@ -7,9 +7,10 @@ using System.Web;
 
 namespace Tutorial.MyClasses
 {
+
     [Table("Vehicles")]
     public class Vehicle
-    {
+    { 
         public int id { get; set; }
         public String make { get; set; }
         public String model { get; set; }

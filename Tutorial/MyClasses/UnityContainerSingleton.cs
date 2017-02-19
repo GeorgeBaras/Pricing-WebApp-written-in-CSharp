@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Tutorial.EF_DBContext;
+using Tutorial.EF_DBContext_Repositories;
 
 namespace Tutorial.MyClasses
 {
@@ -64,7 +65,13 @@ namespace Tutorial.MyClasses
                 ));
 
             // MyApplicationDBContext
-            //myUnityContainer.RegisterType<DbContext, MyApplicationDBContext>("applicationDBContext");
+            myUnityContainer.RegisterType<DbContext, MyApplicationDBContext>("applicationDBContext");
+
+            // Repositories
+            myUnityContainer.RegisterType<IRepository, VehicleRepository>("vehicleRepository",new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
+            myUnityContainer.RegisterType<IRepository, PriceBandRepository>("priceBandRepository", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
+            myUnityContainer.RegisterType<IRepository, PriceRecordRepository>("priceRecordRepository", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
+
 
         }
 
