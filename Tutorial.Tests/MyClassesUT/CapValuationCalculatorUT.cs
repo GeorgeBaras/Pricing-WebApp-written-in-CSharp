@@ -36,24 +36,24 @@ namespace Tutorial.Tests.MyClassesUT
 
         [ClassInitialize]
         public static void Setup(TestContext testContextInstance) {
-            lowBand = new PriceBandImp(10, new decimal(20000.0));
-            midBand = new PriceBandImp(15, new decimal(15000.0));
-            highBand = new PriceBandImp(20, new decimal(10000.0));
+            lowBand = new PriceBand(10, new decimal(20000.0));
+            midBand = new PriceBand(15, new decimal(15000.0));
+            highBand = new PriceBand(20, new decimal(10000.0));
 
             lowOnlyPriceBands = new List<PriceBand>();
             lowOnlyPriceBands.Add(lowBand);
-            lowOnly = new PriceRecordImp("lowBand", lowOnlyPriceBands);
+            lowOnly = new PriceRecord("lowBand", lowOnlyPriceBands);
 
             lowAndMidPriceBands = new List<PriceBand>();
             lowAndMidPriceBands.Add(lowBand);
             lowAndMidPriceBands.Add(midBand);
-            lowAndMid = new PriceRecordImp("lowAndMid", lowAndMidPriceBands);
+            lowAndMid = new PriceRecord("lowAndMid", lowAndMidPriceBands);
 
             allBandsPriceBands = new List<PriceBand>();
             allBandsPriceBands.Add(lowBand);
             allBandsPriceBands.Add(midBand);
             allBandsPriceBands.Add(highBand);
-            allBands = new PriceRecordImp("allBands", allBandsPriceBands);
+            allBands = new PriceRecord("allBands", allBandsPriceBands);
 
             capValuationCalculator = new CAPValuationCalculator();
         }
@@ -149,13 +149,13 @@ namespace Tutorial.Tests.MyClassesUT
         [TestMethod]
         public void TestForNewCustomBands()
         {
-            PriceBand customLowBand = new PriceBandImp(1, new decimal(50000.0));
-            PriceBand customHighBand = new PriceBandImp(10, new decimal(25000.0));
+            PriceBand customLowBand = new PriceBand(1, new decimal(50000.0));
+            PriceBand customHighBand = new PriceBand(10, new decimal(25000.0));
             List<PriceBand> customPriceBandList = new List<PriceBand>();
             customPriceBandList.Add(customLowBand);
             customPriceBandList.Add(customHighBand);
 
-            PriceRecord customPR = new PriceRecordImp("customPR", customPriceBandList);
+            PriceRecord customPR = new PriceRecord("customPR", customPriceBandList);
 
             decimal actual = Math.Round(capValuationCalculator.calculate(customPR, 2), 2);
             decimal expected = new decimal(47222.22);

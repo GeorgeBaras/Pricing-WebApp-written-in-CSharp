@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Practices.Unity;
 using Tutorial.MyClasses;
+using System.Collections.Generic;
 
 namespace Tutorial.Tests.MyClassesUT
 {

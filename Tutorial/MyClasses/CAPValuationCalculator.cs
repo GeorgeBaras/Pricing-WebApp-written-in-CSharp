@@ -12,7 +12,7 @@ namespace Tutorial.MyClasses
         public decimal calculate(PriceRecord priceRecord, int currentMileage)
         {
             // Exact
-            PriceBand currentPriceBand = findExactPriceBand(priceRecord, currentMileage);
+            IPriceBand currentPriceBand = findExactPriceBand(priceRecord, currentMileage);
             if (currentPriceBand != null) {
                 return currentPriceBand.getValuation();
             }
@@ -33,7 +33,7 @@ namespace Tutorial.MyClasses
             }
         }
 
-        protected decimal calculatePriceFromBand(PriceBand closestPriceBand, int currentMileage) {
+        protected decimal calculatePriceFromBand(IPriceBand closestPriceBand, int currentMileage) {
             if (currentMileage < closestPriceBand.getMileage())
             {
                 return adjustPriceUp(closestPriceBand.getValuation(), Math.Abs(currentMileage - closestPriceBand.getMileage()));

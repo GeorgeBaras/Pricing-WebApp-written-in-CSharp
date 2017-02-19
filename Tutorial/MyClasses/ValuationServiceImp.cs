@@ -20,8 +20,8 @@ namespace Tutorial.MyClasses
 
         public decimal valueVehicle(Vehicle vehicle)
         {
-            log.Info("Got into the vehicle valuation for vehicle-lookupCode: "+vehicle.LookupCode);
-            return this.ValuationCalculator.calculate(this.ValuationDAO.getPriceRecord(vehicle.LookupCode),vehicle.Mileage);
+            log.Info("Got into the vehicle valuation for vehicle-lookupCode: "+vehicle.lookupCode);
+            return this.ValuationCalculator.calculate(this.ValuationDAO.getPriceRecord(vehicle.lookupCode),vehicle.mileage);
         }
 
         public ValuationDAO ValuationDAO

@@ -28,7 +28,7 @@ namespace Tutorial.Tests.MyClassesUT
             // mock ValuationCalculator
             mockValuationCalculator = new Mock<ValuationCalculator>();
             
-            priceRecord = new PriceRecordImp("lookupCode", new List<PriceBand>());
+            priceRecord = new PriceRecord("lookupCode", new List<PriceBand>());
 
             mockValuationDAO
                 .Setup(o => o.getPriceRecord(It.IsAny<String>()))
