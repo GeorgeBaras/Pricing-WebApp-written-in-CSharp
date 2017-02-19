@@ -7,9 +7,9 @@ using Tutorial.MyClasses;
 
 namespace Tutorial.EF_DBContext
 {
-    public class MyApplicationDBContext : DbContext
+    public class appDBContext : DbContext
     {
-        public MyApplicationDBContext(): base()
+        public appDBContext(): base()
         {
 
         }

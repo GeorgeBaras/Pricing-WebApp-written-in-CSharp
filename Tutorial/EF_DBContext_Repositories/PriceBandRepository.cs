@@ -9,15 +9,15 @@ namespace Tutorial.EF_DBContext_Repositories
 {
     public class PriceBandRepository : IRepository
     {
-        private MyApplicationDBContext db;
-        public PriceBandRepository(MyApplicationDBContext db)
+        private appDBContext db;
+        public PriceBandRepository(appDBContext db)
         {
             this.db = db;
         }
 
         public List<PriceBand> getAllEntries()
         {
-            MyApplicationDBContext myApplicationDBContext = new MyApplicationDBContext();
+            appDBContext myApplicationDBContext = new appDBContext();
             return myApplicationDBContext.PriceBands.ToList();
         }
 

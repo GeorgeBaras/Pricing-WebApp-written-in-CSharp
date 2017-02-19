@@ -17,7 +17,7 @@ namespace Tutorial.Tests.DataBaseUT
         
     static IUnityContainer  myContainer = UnityContainerSingleton.getContainer();
     static VehicleRepository vehicleRepository = (VehicleRepository) myContainer.Resolve<IRepository>("vehicleRepository");
-    static MyApplicationDBContext db = (MyApplicationDBContext) myContainer.Resolve<DbContext>("applicationDBContext");
+    static appDBContext db = (appDBContext) myContainer.Resolve<DbContext>("applicationDBContext");
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContextInstance)
@@ -97,7 +97,7 @@ namespace Tutorial.Tests.DataBaseUT
         {
             bool deleted = vehicleRepository.deleteAllEntries();
             // Recreate the DB entries
-            AddVehiclesToDB((MyApplicationDBContext)myContainer.Resolve<DbContext>("applicationDBContext"));
+            AddVehiclesToDB((appDBContext)myContainer.Resolve<DbContext>("applicationDBContext"));
 
             Assert.IsTrue(deleted, "There are still entries in the DB");
             
@@ -109,7 +109,7 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.IsTrue(!vehicleRepository.dbIsEmpty(), "Database is empty");
         }
 
-        private static void AddVehiclesToDB(MyApplicationDBContext db)
+        private static void AddVehiclesToDB(appDBContext db)
         {
             Vehicle vehicle = new Vehicle("myMake", "myModel", "myDerivative", "myLookupCode", 10, new decimal(10000));
             Vehicle vehicle1 = new Vehicle("myMake1", "myModel1", "myDerivative1", "myLookupCode1", 20, new decimal(20000));
@@ -120,7 +120,7 @@ namespace Tutorial.Tests.DataBaseUT
             db.SaveChanges();
         }
 
-        private static void AddPriceRecordsToDB(MyApplicationDBContext db)
+        private static void AddPriceRecordsToDB(appDBContext db)
         {
             PriceBand priceBand1 = new PriceBand(10, new decimal(1000));
             PriceBand priceBand2 = new PriceBand(20, new decimal(2000));

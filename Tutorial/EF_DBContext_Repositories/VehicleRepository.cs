@@ -11,8 +11,8 @@ namespace Tutorial.EF_DBContext_Repositories
     {
     public enum VehicleFields {make, model, derivative, lookupCode, mileage, value};
 
-    private MyApplicationDBContext db;
-    public VehicleRepository(MyApplicationDBContext db)
+    private appDBContext db;
+    public VehicleRepository(appDBContext db)
     {
             this.db = db;
     }

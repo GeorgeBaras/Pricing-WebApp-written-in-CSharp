@@ -64,8 +64,8 @@ namespace Tutorial.MyClasses
                 myUnityContainer.Resolve<ValuationCalculator>("CapValuationCalculator")
                 ));
 
-            // MyApplicationDBContext
-            myUnityContainer.RegisterType<DbContext, MyApplicationDBContext>("applicationDBContext");
+            // appDBContext
+            myUnityContainer.RegisterType<DbContext, appDBContext>("applicationDBContext");
 
             // Repositories
             myUnityContainer.RegisterType<IRepository, VehicleRepository>("vehicleRepository",new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));

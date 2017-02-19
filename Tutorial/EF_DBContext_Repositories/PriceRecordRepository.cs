@@ -9,8 +9,8 @@ namespace Tutorial.EF_DBContext_Repositories
     public class PriceRecordRepository : IRepository
     {
 
-        private MyApplicationDBContext db;
-        public PriceRecordRepository(MyApplicationDBContext db)
+        private appDBContext db;
+        public PriceRecordRepository(appDBContext db)
         {
             this.db = db;
         }
