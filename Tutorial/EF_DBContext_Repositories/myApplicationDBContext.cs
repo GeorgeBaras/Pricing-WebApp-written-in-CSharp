@@ -13,9 +13,18 @@ namespace Tutorial.EF_DBContext
         {
 
         }
-        public DbSet<Vehicle> Vehicles  { get; set;}
-        public DbSet<PriceBandImp> PriceBands { get; set; }
-        public DbSet<PriceRecordImp> PriceRecords { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set;}
+        public DbSet<PriceBand> PriceBands { get; set; }
+        public DbSet<PriceRecord> PriceRecords { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PriceBand>()
+            .HasRequired(t => t.PriceRecordImp)
+            .WithMany(t => t.PriceBands)
+            .HasForeignKey(d => d.PriceRecordImpId)
+            .WillCascadeOnDelete(false);
+        }
 
     }
 }

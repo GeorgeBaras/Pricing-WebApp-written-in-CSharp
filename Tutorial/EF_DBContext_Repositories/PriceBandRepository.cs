@@ -9,7 +9,7 @@ namespace Tutorial.EF_DBContext_Repositories
 {
     public class PriceBandRepository
     {
-        public List<PriceBandImp> GetPriceBands()
+        public List<PriceBand> GetPriceBands()
         {
             MyApplicationDBContext myApplicationDBContext = new MyApplicationDBContext();
             return myApplicationDBContext.PriceBands.ToList();

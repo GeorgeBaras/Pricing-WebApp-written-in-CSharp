@@ -279,10 +279,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="MyClasses\CAPValuationCalculator.cs" />
+    <Compile Include="MyClasses\IPriceBand.cs" />
     <Compile Include="MyClasses\PriceBand.cs" />
-    <Compile Include="MyClasses\PriceBandImp.cs" />
+    <Compile Include="MyClasses\IPriceRecord.cs" />
     <Compile Include="MyClasses\PriceRecord.cs" />
-    <Compile Include="MyClasses\PriceRecordImp.cs" />
     <Compile Include="MyClasses\UnityContainerSingleton.cs" />
     <Compile Include="MyClasses\ValuationCalculator.cs" />
     <Compile Include="MyClasses\ValuationDAO.cs" />
