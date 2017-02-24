@@ -35,12 +35,13 @@ namespace Tutorial.Tests.DataBaseUT
         public void TestAddVehicle() {
            Vehicle vehicle = new Vehicle("myMake100", "myModel100", "myDerivative100", "myLookupCode100", 10, new decimal(10000));
            Vehicle addedVehicle = vehicleRepository.addVehicle(vehicle);
-           vehicleRepository.deleteVehicleBylookupCode("myLookupCode100");
+            if (!vehicleRepository.deleteVehicleBylookupCode("myLookupCode100")) {
+                Assert.Fail();
+            }
            Assert.AreEqual(vehicle, addedVehicle, "Entry was not added correctly");
         
         }
 
-        [Ignore]
         [TestMethod]
         public void TestAddVehicleList()
         {
@@ -54,7 +55,9 @@ namespace Tutorial.Tests.DataBaseUT
             int countAfterAddedVehicles = vehicleRepository.getAllEntries().Count;
 
             foreach (Vehicle vehicle in  vehicleList) {
-                vehicleRepository.deleteVehicleBylookupCode(vehicle.lookupCode);
+                if (!vehicleRepository.deleteVehicleBylookupCode(vehicle.lookupCode)) {
+                    Assert.Fail();
+                }
             }
             Assert.AreEqual(countAfterAddedVehicles- countOfAddedVehicles, vehicleRepository.getAllEntries().Count, "Entries were not added correctly");
 

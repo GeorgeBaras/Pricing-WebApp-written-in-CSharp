@@ -24,8 +24,15 @@ namespace Tutorial.EF_DBContext_Repositories
         }
 
         public int addVehicleList(List<Vehicle> vehicles) {
-            IEnumerable<Vehicle> addedVehicles = db.Vehicles.AddRange(vehicles);
-            return addedVehicles.Count<Vehicle>();
+            int addedVehicles = 0;
+            foreach (Vehicle vehicle in vehicles)
+            {
+                if (addVehicle(vehicle) != null)
+                {
+                    addedVehicles++;
+                }
+            }
+            return addedVehicles;
         }
 
         public List<Vehicle> getAllEntries()

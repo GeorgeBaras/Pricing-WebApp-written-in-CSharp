@@ -270,7 +270,6 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="EF_DBContext_Repositories\IRepository.cs" />
     <Compile Include="EF_DBContext_Repositories\MyApplicationDBContext.cs" />
-    <Compile Include="EF_DBContext_Repositories\PriceBandRepository.cs" />
     <Compile Include="EF_DBContext_Repositories\PriceRecordRepository.cs" />
     <Compile Include="EF_DBContext_Repositories\VehicleRepository.cs" />
     <Compile Include="Global.asax.cs">
