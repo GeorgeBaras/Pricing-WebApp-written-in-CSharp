@@ -2,16 +2,75 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tutorial.EF_DBContext;
 using Tutorial.MyClasses;
+using Microsoft.Practices.Unity;
+using Tutorial.EF_DBContext_Repositories;
+using System.Data.Entity;
 
 namespace Tutorial.Tests.DataBaseUT
 {
     [TestClass]
     public class PriceRecordRepositoryUT
     {
+        static IUnityContainer myContainer = UnityContainerSingleton.getContainer();
+        static PriceRecordRepository priceRecordRepository = (PriceRecordRepository) myContainer.Resolve<IRepository>("priceRecordRepository");
+        static appDBContext db = (appDBContext)myContainer.Resolve<DbContext>("applicationDBContext");
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContextInstance)
+        {
+            AddPriceRecordsToDB(db);
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            db.Database.Delete();
+        }
+
         [TestMethod]
-        public void TestMethod1()
+        public void TestAddPriceRecord()
         {
         }
+
+        [TestMethod]
+        public void TestAddPriceRecordList()
+        {
+        }
+
+        [TestMethod]
+        public void TestPriceRecordRepositoryGetAllEntries()
+        {
+        }
+
+        [TestMethod]
+        public void TestGetPriceRecordByLookupCode()
+        {
+        }
+
+        [TestMethod]
+        public void TestPriceRecordRepositoryUpdateFieldByLookupCode()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestPriceRecordRepositoryDeletePriceRecordByLookupCode()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestPriceRecordRepositoryDeleteAllEntries()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestPriceRecordRepositoryDbIsEmpty()
+        {
+
+        }
+
 
 
         private static void AddPriceRecordsToDB(appDBContext db)

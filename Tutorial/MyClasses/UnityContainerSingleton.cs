@@ -67,11 +67,13 @@ namespace Tutorial.MyClasses
             // appDBContext
             myUnityContainer.RegisterType<DbContext, appDBContext>("applicationDBContext");
 
-            // Repositories
-            myUnityContainer.RegisterType<IRepository, VehicleRepository>("vehicleRepository",new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
-            myUnityContainer.RegisterType<IRepository, PriceBandRepository>("priceBandRepository", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
-            myUnityContainer.RegisterType<IRepository, PriceRecordRepository>("priceRecordRepository", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
+            // DAOs
+            myUnityContainer.RegisterType<IDao, VehicleDAO>("vehicleDAO", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
+            myUnityContainer.RegisterType<IDao, PriceRecordDAO>("priceRecordDAO", new InjectionConstructor(myUnityContainer.Resolve<DbContext>("applicationDBContext")));
 
+            // Repositories
+            myUnityContainer.RegisterType<IRepository, VehicleRepository>("vehicleRepository",new InjectionConstructor(myUnityContainer.Resolve<IDao>("vehicleDAO")));
+            myUnityContainer.RegisterType<IRepository, PriceRecordRepository>("priceRecordRepository", new InjectionConstructor(myUnityContainer.Resolve<IDao>("priceRecordDAO")));
 
         }
 

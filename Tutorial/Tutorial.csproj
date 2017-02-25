@@ -268,9 +268,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="EF_DBContext_Repositories\IDao.cs" />
     <Compile Include="EF_DBContext_Repositories\IRepository.cs" />
     <Compile Include="EF_DBContext_Repositories\MyApplicationDBContext.cs" />
+    <Compile Include="EF_DBContext_Repositories\PriceRecordDAO.cs" />
     <Compile Include="EF_DBContext_Repositories\PriceRecordRepository.cs" />
+    <Compile Include="EF_DBContext_Repositories\VehicleDAO.cs" />
     <Compile Include="EF_DBContext_Repositories\VehicleRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

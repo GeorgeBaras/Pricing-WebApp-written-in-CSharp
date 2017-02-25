@@ -133,6 +133,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBaseUT\PriceRecordRepositoryUT.cs" />
     <Compile Include="DataBaseUT\VehicleRepositoryUT.cs" />
     <Compile Include="MyClassesUT\CapValuationCalculatorUT.cs" />
     <Compile Include="MyClassesIT\ValuationServiceIntegrationTest.cs" />

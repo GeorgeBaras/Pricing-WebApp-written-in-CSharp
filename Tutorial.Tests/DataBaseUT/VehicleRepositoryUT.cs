@@ -81,7 +81,7 @@ namespace Tutorial.Tests.DataBaseUT
         [TestMethod]
         public void TestVehicleRepositoryUpdateFieldBylookupCode()
         {
-            vehicleRepository.updateFieldBylookupCode<String>("myLookupCode", VehicleFields.make, "newAndUpdatedMake");
+            vehicleRepository.updateFieldBylookupCode<String>("myLookupCode", VehicleDAO.VehicleFields.make, "newAndUpdatedMake");
             Vehicle vehicle = vehicleRepository.getVehicleByLookupCode("myLookupCode");
             Assert.AreEqual("newAndUpdatedMake", vehicle.make, "Incorrect make for the updated entry");
         }
@@ -120,27 +120,6 @@ namespace Tutorial.Tests.DataBaseUT
             db.Vehicles.Add(vehicle);
             db.Vehicles.Add(vehicle1);
             db.Vehicles.Add(vehicle2);
-            db.SaveChanges();
-        }
-
-        private static void AddPriceRecordsToDB(appDBContext db)
-        {
-            PriceBand priceBand1 = new PriceBand(10, new decimal(1000));
-            PriceBand priceBand2 = new PriceBand(20, new decimal(2000));
-            PriceBand priceBand3 = new PriceBand(20, new decimal(2000));
-
-            PriceRecord priceRecord1 = new PriceRecord("firstRecord", priceBand1);
-            PriceRecord priceRecord2 = new PriceRecord("secondRecord", priceBand1);
-
-            priceRecord1.PriceBands.Add(priceBand1);
-
-            priceRecord2.PriceBands.Add(priceBand1);
-            priceRecord2.PriceBands.Add(priceBand2);
-            priceRecord2.PriceBands.Add(priceBand3);
-
-
-            db.PriceRecords.Add((PriceRecord)priceRecord1);
-            db.PriceRecords.Add((PriceRecord)priceRecord2);
             db.SaveChanges();
         }
 

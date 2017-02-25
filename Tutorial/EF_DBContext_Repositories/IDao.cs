@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Tutorial.EF_DBContext_Repositories
 {
-    public interface IRepository
+    public interface IDao
     {
-     
+        //List<T> GetAllEntries<T>();
+        Boolean dbIsEmpty();
+        Boolean deleteAllEntries();
     }
 }
