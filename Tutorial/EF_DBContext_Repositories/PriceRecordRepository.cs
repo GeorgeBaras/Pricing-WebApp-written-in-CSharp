@@ -41,11 +41,15 @@ namespace Tutorial.EF_DBContext_Repositories
             return priceRecordDAO.deletePriceRecordByLookupCode(lookupCode);
         }
 
-        public Boolean updateFieldBulookupCode<T>(string lookupCode, PriceRecordDAO.PriceRecordFields field, T newLookupCode, List<T> priceBands)
+        public Boolean updateLookupCode(string lookupCode, string newLookupCode)
         {
-            return priceRecordDAO.updateFieldBulookupCode<T>(lookupCode, field, newLookupCode, priceBands);
+            return priceRecordDAO.updateLookupCode(lookupCode, newLookupCode);
         }
 
+        public Boolean updatePriceBands(string lookupCode, List<PriceBand> updatedPriceBands)
+        {
+            return priceRecordDAO.updatePriceBands(lookupCode, updatedPriceBands);
+        }
 
 
         public bool dbIsEmpty()

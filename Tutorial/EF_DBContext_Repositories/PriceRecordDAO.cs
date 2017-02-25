@@ -61,35 +61,34 @@ namespace Tutorial.EF_DBContext_Repositories
 
 
             PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
-            // Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove(priceRecord));
-            Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove((PriceRecord)db.PriceRecords.Where(p => p.LookupCode == lookupCode)));
+            Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove(priceRecord));
+            // Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove((PriceRecord)db.PriceRecords.Where(p => p.LookupCode == lookupCode)));
             db.SaveChanges();
             return deleted;
         }
 
-        public Boolean updateFieldBulookupCode<T>(string lookupCode, PriceRecordFields field,T newLookupCode, List<T> priceBands) {
+        public Boolean updateLookupCode(string lookupCode, string newLookupCode) {
             PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
-            switch (field)
-            {
-                case PriceRecordFields.lookupCode:
-                    priceRecord.LookupCode = newLookupCode.ToString();
-                    break;
-                case PriceRecordFields.priceBands:
-                    List<PriceBand> updatedPriceBands = new List<PriceBand>();
-                    foreach (T priceBand in priceBands) {
-                        updatedPriceBands.Add((PriceBand)(object)priceBand);
-                    }
 
-                    priceRecord.PriceBands = updatedPriceBands;
-                    break;
-                default:
-                    return false;
-
-            }
+            priceRecord.LookupCode = newLookupCode.ToString();
             db.SaveChanges();
-            return true;
+            if (priceRecord.LookupCode.Equals(newLookupCode)){
+                return true;
+            }
+            return false;
         }
 
+        public Boolean updatePriceBands(string lookupCode, List<PriceBand> updatedPriceBands)
+        {
+            PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
+            priceRecord.PriceBands = updatedPriceBands;
+            db.SaveChanges();
+            if (priceRecord.PriceBands.Count == updatedPriceBands.Count)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
         public bool dbIsEmpty()

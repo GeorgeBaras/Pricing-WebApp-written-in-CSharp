@@ -23,7 +23,7 @@ namespace Tutorial.EF_DBContext
             .HasRequired(t => t.PriceRecordImp)
             .WithMany(t => t.PriceBands)
             .HasForeignKey(d => d.PriceRecordImpId)
-            .WillCascadeOnDelete(false);
+            .WillCascadeOnDelete(true);
         }
 
     }
