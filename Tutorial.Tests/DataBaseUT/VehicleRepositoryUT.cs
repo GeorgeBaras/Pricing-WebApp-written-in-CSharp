@@ -10,7 +10,7 @@ using static Tutorial.EF_DBContext_Repositories.VehicleRepository;
 
 namespace Tutorial.Tests.DataBaseUT
 {
-
+    [Ignore]
     [TestClass]
     public class VehicleRepositoryUT
     {
