@@ -22,6 +22,8 @@ namespace Tutorial.Tests.DataBaseUT
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContextInstance)
         {
+            db.Database.Delete();
+
             AddPriceRecordsToDB(db);
             priceRecordEntriesCount = 2;
             priceBandEntriesCount = 3;
@@ -44,12 +46,6 @@ namespace Tutorial.Tests.DataBaseUT
             }
 
             Assert.AreEqual(priceRecordRepository.getAllEntries().Count,priceRecordEntriesCount, "PriceRecord was not added properly");
-            //if (!priceRecordRepository.deletePriceRecordByLookupCode(priceRecord.getLookupCode()))
-            //{
-            //    Assert.Fail();
-            //}
-            //Assert.AreEqual(addedPriceRecord, priceRecord, "Entry was not added correctly");
-
         }
 
         [TestMethod]
@@ -96,7 +92,6 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.IsNotNull(priceRecordRepository.getPriceRecordByLookupCode("updatedSecondRecord"), "The record was not updated successfully");
         }
 
-        [Ignore]
         [TestMethod]
         public void TestPriceRecordRepositoryUpdatePriceBands()
         {
@@ -106,17 +101,21 @@ namespace Tutorial.Tests.DataBaseUT
 
             List<PriceBand> priceBands = priceRecordRepository.getPriceRecordByLookupCode("firstRecord").getPriceBands();
             priceRecordRepository.updatePriceBands("firstRecord", updatedPriceBands);
-            Assert.AreEqual(updatedPriceBands[0].getMileage(),priceBands[0].getMileage(), "PriceBands were not updated successfully");
+            Assert.AreEqual(updatedPriceBands[0].getMileage(), priceRecordRepository.getPriceRecordByLookupCode("firstRecord").getPriceBands()[0].getMileage(), "PriceBands were not updated successfully");
         }
 
-        [Ignore]
         [TestMethod]
         public void TestPriceRecordRepositoryDeletePriceRecordByLookupCode()
         {
-            PriceRecord firstPriceRecord = priceRecordRepository.getPriceRecordByLookupCode("firstRecord");
-            Assert.AreEqual("firstRecord", firstPriceRecord.getLookupCode(), "Incorrect record retrieved");
-        }
 
+            PriceRecord priceRecord = getPriceRecord();
+            priceRecord.LookupCode = "testPRforDeletion";
+            priceRecordRepository.addPriceRecord(priceRecord);
+
+            bool deleted = priceRecordRepository.deletePriceRecordByLookupCode("testPRforDeletion");
+            
+            Assert.IsTrue(deleted, "Record not deleted successfully");
+        }
 
         [Ignore]
         [TestMethod]
@@ -136,7 +135,7 @@ namespace Tutorial.Tests.DataBaseUT
         [TestMethod]
         public void TestPriceRecordRepositoryDbIsEmpty()
         {
-            Assert.IsFalse(priceRecordRepository.dbIsEmpty(), "DB is not emptyt");
+            Assert.IsFalse(priceRecordRepository.dbIsEmpty(), "DB is not empty");
         }
 
 

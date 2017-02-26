@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Tutorial.EF_DBContext;
@@ -57,15 +58,12 @@ namespace Tutorial.EF_DBContext_Repositories
             return null;
         }
 
-        public Boolean deletePriceRecordByLookupCode(string lookupCode) {
-
-
-            PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
-            Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove(priceRecord));
-            // Boolean deleted = priceRecord.Equals(db.PriceRecords.Remove((PriceRecord)db.PriceRecords.Where(p => p.LookupCode == lookupCode)));
-            db.SaveChanges();
-            return deleted;
+        public Boolean deletePriceRecordByLookupCode(string lookupCode)
+        {
+            int deleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.PriceRecords WHERE LookupCode =@lookupCode", new SqlParameter("@lookupCode",lookupCode));
+            return deleted == 1;
         }
+
 
         public Boolean updateLookupCode(string lookupCode, string newLookupCode) {
             PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
@@ -81,7 +79,16 @@ namespace Tutorial.EF_DBContext_Repositories
         public Boolean updatePriceBands(string lookupCode, List<PriceBand> updatedPriceBands)
         {
             PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);
-            priceRecord.PriceBands = updatedPriceBands;
+            List<PriceBand> priceBands = getPriceBandsByPriceRecordId(priceRecord.PriceRecordId);
+            db.PriceBands.RemoveRange(priceBands);
+            db.SaveChanges();
+
+            foreach (var priceBand in updatedPriceBands)
+            {
+                priceBand.PriceRecordImpId = priceRecord.PriceRecordId;
+                db.PriceBands.Add(priceBand);
+            }
+
             db.SaveChanges();
             if (priceRecord.PriceBands.Count == updatedPriceBands.Count)
             {
@@ -98,9 +105,31 @@ namespace Tutorial.EF_DBContext_Repositories
 
         public bool deleteAllEntries()
         {
-            Boolean deleted = (getAllEntries().Count == db.PriceRecords.RemoveRange(getAllEntries()).ToList<PriceRecord>().Count);
-            db.SaveChanges();
-            return deleted;
+            //var query = from p in db.PriceRecords
+            //            select p;
+            //foreach (var priceRecord in query)
+            //{
+            //    if (!deletePriceRecordByLookupCode(priceRecord.LookupCode)){
+            //        return false;
+            //    }
+            //}
+            //return true;                     
+            int deleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.PriceRecords");
+            return deleted == 1;
+        }
+
+        private List<PriceBand> getPriceBandsByPriceRecordId(int priceRecordId) {
+            List<PriceBand> priceBands = new List<PriceBand>();
+            var query = from v in db.PriceBands
+                            where v.PriceRecordImpId == priceRecordId
+                            orderby v.PriceBandId
+                            select v;
+
+            foreach (var priceBand in query)
+            {
+                priceBands.Add(priceBand);
+            }
+            return priceBands;
         }
     }
 }
