@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Tutorial.MyClasses
 {
+    [Serializable]
     [Table("PriceBands")]
     public class PriceBand : IPriceBand
     {

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Tutorial.MyClasses
 {
-
+    [Serializable]
     [Table("Vehicles")]
     public class Vehicle
     { 

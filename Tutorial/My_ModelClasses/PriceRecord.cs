@@ -7,7 +7,8 @@ using System.Web;
 
 namespace Tutorial.MyClasses
 {
-    //[Table("PriceRecords")]
+    [Serializable]
+    [Table("PriceRecords")]
     public class PriceRecord : IPriceRecord
     {
         public int PriceRecordId { get; set; }

@@ -22,6 +22,7 @@ namespace Tutorial.Tests.DataBaseUT
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContextInstance)
     {
+      db.Database.Delete();
       AddVehiclesToDB(db);
     }
 
