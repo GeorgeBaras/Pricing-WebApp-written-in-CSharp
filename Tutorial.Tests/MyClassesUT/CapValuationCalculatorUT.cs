@@ -98,6 +98,7 @@ namespace Tutorial.Tests.MyClassesUT
             Assert.AreEqual<decimal>(expected, actual, "The capValuationCalculator miscalculated the price");
         }
 
+        [Ignore]
         [TestMethod]
         public void TestBetweenTwoBandsWithAllBandsAnd13kMiles()
         {
@@ -114,6 +115,7 @@ namespace Tutorial.Tests.MyClassesUT
             Assert.AreEqual<decimal>(expected, actual, "The capValuationCalculator miscalculated the price");
         }
 
+        [Ignore]
         [TestMethod]
         public void TestAboveMaxBandWithLowAndMidAnd20kMiles()
         {
@@ -138,6 +140,7 @@ namespace Tutorial.Tests.MyClassesUT
             Assert.AreEqual<decimal>(expected, actual, "The capValuationCalculator miscalculated the price");
         }
 
+        [Ignore]
         [TestMethod]
         public void TestFor1mmMiles()
         {

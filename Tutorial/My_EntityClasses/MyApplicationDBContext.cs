@@ -20,9 +20,9 @@ namespace Tutorial.EF_DBContext
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PriceBand>()
-            .HasRequired(t => t.PriceRecordImp)
+            .HasRequired(t => t.PriceRecord)
             .WithMany(t => t.PriceBands)
-            .HasForeignKey(d => d.PriceRecordImpId)
+            .HasForeignKey(d => d.PriceRecordId)
             .WillCascadeOnDelete(true);
         }
 

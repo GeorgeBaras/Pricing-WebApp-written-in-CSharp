@@ -10,7 +10,7 @@ using static Tutorial.EF_DBContext_Repositories.VehicleRepository;
 
 namespace Tutorial.Tests.DataBaseUT
 {
-
+    [Ignore]
     [TestClass]
     public class VehicleRepositoryUT
     {
@@ -22,6 +22,7 @@ namespace Tutorial.Tests.DataBaseUT
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContextInstance)
     {
+      db.Database.Delete();
       AddVehiclesToDB(db);
     }
 

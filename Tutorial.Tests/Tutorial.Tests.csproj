@@ -139,6 +139,7 @@
     <Compile Include="MyClassesIT\ValuationServiceIntegrationTest.cs" />
     <Compile Include="MyClassesUT\ValuationDaoUT.cs" />
     <Compile Include="MyClassesIT\ValuationServiceTest.cs" />
+    <Compile Include="MyXMLClassesUT\TestMarsharllingUnmarshalling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
