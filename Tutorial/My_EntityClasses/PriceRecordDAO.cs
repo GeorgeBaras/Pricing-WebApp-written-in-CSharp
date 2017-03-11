@@ -85,7 +85,7 @@ namespace Tutorial.EF_DBContext_Repositories
 
             foreach (var priceBand in updatedPriceBands)
             {
-                priceBand.PriceRecordImpId = priceRecord.PriceRecordId;
+                priceBand.PriceRecordId = priceRecord.PriceRecordId;
                 db.PriceBands.Add(priceBand);
             }
 
@@ -121,7 +121,7 @@ namespace Tutorial.EF_DBContext_Repositories
         private List<PriceBand> getPriceBandsByPriceRecordId(int priceRecordId) {
             List<PriceBand> priceBands = new List<PriceBand>();
             var query = from v in db.PriceBands
-                            where v.PriceRecordImpId == priceRecordId
+                            where v.PriceRecordId == priceRecordId
                             orderby v.PriceBandId
                             select v;
 

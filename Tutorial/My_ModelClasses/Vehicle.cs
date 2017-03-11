@@ -47,7 +47,6 @@ namespace Tutorial.MyClasses
             this.value = value;
         }
 
-        // override object.Equals
         public bool Equals(Vehicle vehicle)
         {
             if (vehicle == null || GetType() != vehicle.GetType())
@@ -83,12 +82,6 @@ namespace Tutorial.MyClasses
                 return false;
             }
             return true;
-        }
-
-        // override object.GetHashCode
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
         
     }

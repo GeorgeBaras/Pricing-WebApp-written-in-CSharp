@@ -50,7 +50,7 @@ namespace Tutorial.My_XMLClasses
             return null;
         }
 
-        public static Object deserializeVehicle(string fullPath)
+        public static Vehicle deserializeVehicle(string fullPath)
         {
             var streamReader = new StreamReader(fullPath);
             string myXml = streamReader.ReadToEnd();
@@ -72,6 +72,61 @@ namespace Tutorial.My_XMLClasses
 
             Vehicle vehicleInstance = new Vehicle(make, model, derivative, lookupCode, mileage, value);
             return vehicleInstance;
+
+        }
+
+        public static PriceBand deserializePriceBand(string fullPath)
+        {
+            var streamReader = new StreamReader(fullPath);
+            string myXml = streamReader.ReadToEnd();
+
+            XDocument xdocument = new XDocument();
+            xdocument = XDocument.Parse(myXml);
+
+            var priceBand = xdocument.Element("PriceBand");
+
+            string id = priceBand.Attribute("id").Value;
+            var elements = priceBand.Descendants();
+
+            
+            int mileage = Convert.ToInt32(priceBand.Element("mileage").Value);
+            decimal valuation = Convert.ToDecimal(priceBand.Element("valuation").Value);
+
+            PriceBand priceBandInstance = new PriceBand(mileage, valuation);
+            return priceBandInstance;
+
+        }
+
+        public static PriceRecord deserializePriceRecord(string fullPath)
+        {
+            var streamReader = new StreamReader(fullPath);
+            string myXml = streamReader.ReadToEnd();
+
+            XDocument xdocument = new XDocument();
+            xdocument = XDocument.Parse(myXml);
+
+            var priceRecord = xdocument.Element("PriceRecord");
+
+            string id = priceRecord.Attribute("id").Value;
+            var elements = priceRecord.Descendants();
+
+
+            string lookupCode = priceRecord.Element("LookupCode").Value;
+            var xmlPriceBands = priceRecord.Element("PriceBands").Elements();
+
+            List<PriceBand> priceBands = new List<PriceBand>();
+            PriceBand priceBandInstance;
+            foreach (var priceBand in xmlPriceBands)
+            {
+                int mileage = Convert.ToInt32(priceBand.Element("mileage").Value);
+                decimal valuation = Convert.ToDecimal(priceBand.Element("valuation").Value);
+
+                priceBandInstance = new PriceBand(mileage, valuation);
+                priceBands.Add(priceBandInstance);
+            }
+
+            PriceRecord priceRecordInstance = new PriceRecord(lookupCode, priceBands);
+            return priceRecordInstance;
 
         }
     }

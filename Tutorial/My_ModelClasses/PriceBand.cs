@@ -20,9 +20,9 @@ namespace Tutorial.MyClasses
         [XmlElement("valuation")]
         public decimal Valuation { get; set; }
 
-        
-        public int PriceRecordImpId { get; set; }
-        public virtual PriceRecord PriceRecordImp { get; set; }
+        [XmlElement("priceRecordId")]
+        public int PriceRecordId { get; set; }
+        public virtual PriceRecord PriceRecord { get; set; }
 
 
         public PriceBand() { }
@@ -39,6 +39,28 @@ namespace Tutorial.MyClasses
         public decimal getValuation()
         {
             return this.Valuation;
+        }
+
+        public bool Equals(PriceBand priceBand)
+        {
+           if (priceBand == null || GetType() != priceBand.GetType())
+            {
+                return false;
+            }
+
+            if (!this.PriceBandId.Equals(priceBand.PriceBandId))
+            {
+                return false;
+            }
+            else if (!this.Mileage.Equals(priceBand.Mileage))
+            {
+                return false;
+            }
+            else if (!this.Valuation.Equals(priceBand.Valuation))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
