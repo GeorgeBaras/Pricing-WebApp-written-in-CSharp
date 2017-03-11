@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Tutorial.Tests.DataBaseUT
 {
-    [Ignore]
+    // [Ignore]
     [TestClass]
     public class PriceRecordRepositoryUT
     {

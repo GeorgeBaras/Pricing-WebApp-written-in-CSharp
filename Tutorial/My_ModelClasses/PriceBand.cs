@@ -4,17 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace Tutorial.MyClasses
 {
     [Serializable]
     [Table("PriceBands")]
+    [XmlRoot("PriceBand")]
     public class PriceBand : IPriceBand
     {
+        [XmlAttribute("id")]
         public int PriceBandId { get; set; }
+        [XmlElement("mileage")]
         public int Mileage { get; set; }
+        [XmlElement("valuation")]
         public decimal Valuation { get; set; }
 
+        
         public int PriceRecordImpId { get; set; }
         public virtual PriceRecord PriceRecordImp { get; set; }
 

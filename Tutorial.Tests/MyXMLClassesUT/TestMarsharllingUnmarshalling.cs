@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tutorial.My_XMLClasses;
 using Tutorial.MyClasses;
 using System.IO;
+using System.Reflection;
 
 namespace Tutorial.Tests.MyXMLClassesUT
 {
@@ -13,28 +14,28 @@ namespace Tutorial.Tests.MyXMLClassesUT
         public void TestSerialize()
         {
             Vehicle vehicle = new Vehicle("myMake100", "myModel100", "myDerivative100", "myLookupCode100", 10, new decimal(10000));
+            PriceBand priceBand = new PriceBand(10, new decimal(10000));
+            PriceBand priceBand1 = new PriceBand(20, new decimal(20000));
 
-            string type = vehicle.GetType().ToString();
-            StreamWriter writer = new StreamWriter(vehicle.GetType().ToString()+vehicle.id.ToString()+".xml");
+            PriceRecord priceRecord = new PriceRecord("prLookUp", priceBand);
+            priceRecord.PriceBands.Add(priceBand1);
+            
+            Assert.IsTrue(File.Exists(XMLManager.serializeAndReturnXMLPath(vehicle)),"Vehicle Xml file was created successfully");
+            Assert.IsTrue(File.Exists(XMLManager.serializeAndReturnXMLPath(priceBand)), "PriceBand Xml file was created successfully");
+         //   Assert.IsTrue(File.Exists(XMLManager.serializeAndReturnXMLPath(priceRecord)), "PriceRecord Xml file was created successfully");
 
-            Assert.IsTrue(File.Exists(XMLManager.serializeAndReturnXMLPath(writer, vehicle)),"Xml file was created successfully");
         }
 
         [TestMethod]
-        public void TestDeserialize()
+        public void TestDeserializeVehicle()
         {
-            // create xml file
             Vehicle vehicle = new Vehicle("myMake100", "myModel100", "myDerivative100", "myLookupCode100", 10, new decimal(10000));
-            string type = vehicle.GetType().ToString();
-            StreamWriter writer = new StreamWriter(vehicle.GetType().ToString() + vehicle.id.ToString() + ".xml");
-            string xmlFilePath = XMLManager.serializeAndReturnXMLPath(writer, vehicle);
 
-            writer.Close();
+            string xmlFilePath = XMLManager.serializeAndReturnXMLPath(vehicle);
 
-            // unmarshal vehicle object from xml file
-            Vehicle unmarshalledVehicle = (Vehicle)XMLManager.deserialize(xmlFilePath);
+            Vehicle unmarshalledVehicle = (Vehicle)XMLManager.deserializeVehicle(xmlFilePath);
 
-            Assert.IsTrue(Vehicle.Equals(vehicle, unmarshalledVehicle),"Unmarshalled vehicle was not same as the original one.");
+            Assert.IsTrue(vehicle.Equals(unmarshalledVehicle),"Unmarshalled vehicle was not same as the original one.");
         }
     }
 }
