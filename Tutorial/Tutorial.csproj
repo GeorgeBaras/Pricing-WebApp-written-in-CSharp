@@ -268,6 +268,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="My_EntityClasses\DatabaseGenerator.cs" />
     <Compile Include="My_EntityClasses\IDao.cs" />
     <Compile Include="My_EntityClasses\IRepository.cs" />
     <Compile Include="My_EntityClasses\MyApplicationDBContext.cs" />
