@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Tutorial.Providers;
 using Tutorial.Models;
+using Tutorial.My_EntityClasses;
 
 namespace Tutorial
 {
@@ -22,6 +23,12 @@ namespace Tutorial
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            //*** Create the test DB if !exists
+            if (!ModelWorld.db.Database.Exists())
+            {
+                ModelWorld.GenerateSmallDB();
+            }
+
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

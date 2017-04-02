@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Available Vehicles</h2>
+<div>
+@if (ViewData["vehicles"] != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>LookupCode</th>
+                <th>Mileage</th>
+                <th>Valuation</th>
+            </tr>
+        </thead>
+
+    <tbody>
+    
+        @foreach (var vehicle in ViewData["vehicles"] as List<Tutorial.MyClasses.Vehicle>)
+        {
+        <tr>
+            <td>@vehicle.id</td>
+            <td>@vehicle.make</td>
+            <td>@vehicle.model</td>
+            <td>@vehicle.lookupCode</td>
+            <td>@vehicle.mileage</td>
+            <td>@vehicle.value</td>
+        </tr>
+        }
+   
+    </tbody>
+    </table>
+    }
+    <form method="post">
+        @ViewBag.Message
+        <input type="number" min="0" name="vehicleId">
+        <br>
+        <input type="submit" value="Submit">
+    </form> 
+</div>
+<br><br><br>
+<p>
+    @Html.ActionLink("Back to Home", "Index")
+</p>

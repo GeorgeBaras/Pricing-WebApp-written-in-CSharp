@@ -10,7 +10,7 @@ using static Tutorial.EF_DBContext_Repositories.VehicleRepository;
 
 namespace Tutorial.Tests.DataBaseUT
 {
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class VehicleRepositoryUT
     {
@@ -19,19 +19,25 @@ namespace Tutorial.Tests.DataBaseUT
     static VehicleRepository vehicleRepository = (VehicleRepository) myContainer.Resolve<IRepository>("vehicleRepository");
     static appDBContext db = (appDBContext) myContainer.Resolve<DbContext>("applicationDBContext");
 
+        //[TestMethod]
+        //public void getAllEntriesFromDB() {
+        //    var vehicles = vehicleRepository.getAllEntries();
+        //    vehicles.ToString();
+        //}
+
+
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContextInstance)
     {
       db.Database.Delete();
       AddVehiclesToDB(db);
     }
-
     [ClassCleanup]
     public static void ClassCleanup()
     {
       db.Database.Delete();
     }
-
+        //
         [TestMethod]
         public void TestAddVehicle() {
            Vehicle vehicle = new Vehicle("myMake100", "myModel100", "myDerivative100", "myLookupCode100", 10, new decimal(10000));
@@ -42,7 +48,7 @@ namespace Tutorial.Tests.DataBaseUT
            Assert.AreEqual(vehicle, addedVehicle, "Entry was not added correctly");
         
         }
-
+        //
         [TestMethod]
         public void TestAddVehicleList()
         {
@@ -63,7 +69,7 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.AreEqual(countAfterAddedVehicles- countOfAddedVehicles, vehicleRepository.getAllEntries().Count, "Entries were not added correctly");
 
         }
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryGetAllEntries()
         {
@@ -71,14 +77,14 @@ namespace Tutorial.Tests.DataBaseUT
             List<Vehicle> vehicles = vehicleRepository.getAllEntries();
             Assert.AreEqual(3, vehicles.Count, "Incorrect number of vehicles returned."); 
         }
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryGetVehicleByLookupCode()
         {
             Vehicle vehicle = vehicleRepository.getVehicleByLookupCode("myLookupCode");
             Assert.AreEqual("myDerivative", vehicle.derivative, "Incorrect vehicle record retrieved");
         }
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryUpdateFieldBylookupCode()
         {
@@ -87,7 +93,7 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.AreEqual("newAndUpdatedMake", vehicle.make, "Incorrect make for the updated entry");
         }
 
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryDeleteVehicleBylookupCode()
         {
@@ -95,7 +101,7 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.AreEqual(2, vehicleRepository.getAllEntries().Count, "Vehicle was not removed");
         }
 
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryDeleteAllEntries()
         {
@@ -106,7 +112,7 @@ namespace Tutorial.Tests.DataBaseUT
             Assert.IsTrue(deleted, "There are still entries in the DB");
             
         }
-
+        //
         [TestMethod]
         public void TestVehicleRepositoryDbIsEmpty()
         {

@@ -136,7 +136,7 @@
     <Compile Include="DataBaseUT\PriceRecordRepositoryUT.cs" />
     <Compile Include="DataBaseUT\DatabaseGeneratorUT.cs" />
     <Compile Include="DataBaseUT\VehicleRepositoryUT.cs" />
-    <Compile Include="ModelWorld\ModelWorld.cs" />
+    <Compile Include="ModelWorld\ModelWorldUT.cs" />
     <Compile Include="MyClassesUT\CapValuationCalculatorUT.cs" />
     <Compile Include="MyClassesIT\ValuationServiceIntegrationTest.cs" />
     <Compile Include="MyClassesUT\ValuationDaoUT.cs" />

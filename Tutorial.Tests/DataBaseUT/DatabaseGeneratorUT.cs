@@ -12,7 +12,7 @@ namespace Tutorial.Tests.DataBaseUT
         [TestMethod]
         public void TestGenerateVehicles()
         {
-            List<Vehicle> vehicles = DatabaseGenerator.generateVehicles(1000);
+            List<Vehicle> vehicles = My_EntityClasses.ModelWorld.generateVehicles(1000);
             Assert.AreEqual(1000, vehicles.Count, "Vehicles were not created successfully");
         }
 
@@ -20,14 +20,14 @@ namespace Tutorial.Tests.DataBaseUT
         [TestMethod]
         public void TestGeneratePriceBands()
         {
-            List<PriceBand> priceBands = DatabaseGenerator.generatePriceBands(100);
+            List<PriceBand> priceBands = My_EntityClasses.ModelWorld.generatePriceBands(100);
             Assert.AreEqual(100, priceBands.Count, "PriceBands were not created successfully");
         }
 
         [TestMethod]
         public void TestGeneratePriceRecords()
         {
-            List<PriceRecord> priceRecords = DatabaseGenerator.generatePriceRecords(1000,10);
+            List<PriceRecord> priceRecords = My_EntityClasses.ModelWorld.generatePriceRecords(1000,10);
             Assert.AreEqual(1000, priceRecords.Count, "PriceRecords were not created successfully");
         }
     }

@@ -10,21 +10,35 @@ using Tutorial.My_EntityClasses;
 namespace Tutorial.Tests.ModelWorld
 {
     [TestClass]
-    public class ModelWorld
+    public class ModelWorldUT
     {
         static IUnityContainer myContainer = UnityContainerSingleton.getContainer();
         static VehicleRepository vehicleRepository = (VehicleRepository)myContainer.Resolve<IRepository>("vehicleRepository");
         static PriceRecordRepository priceRecordRepository = (PriceRecordRepository)myContainer.Resolve<IRepository>("priceRecordRepository");
         static appDBContext db = (appDBContext)myContainer.Resolve<DbContext>("applicationDBContext");
 
-        [Ignore]
+
+        [TestMethod]
+        public void GenerateDatabaseSmallTestDB()
+        {
+            int numberOfRecords = My_EntityClasses.ModelWorld.GenerateSmallDB();
+
+            Assert.AreEqual(numberOfRecords, vehicleRepository.getAllEntries().Count, "Not all vehicle entries were inserted in the database successfully");
+            Assert.AreEqual(numberOfRecords, priceRecordRepository.getAllEntries().Count, "Not all priceRecord entries were inserted in the database successfully");
+        }
+
+       
+
+
+
+        // [Ignore]
         [TestMethod]
         public void GenerateDatabase1k()
         {
             int numberOfRecords = 1000;
             int priceBandsPerPriceRecord = 3;
-            vehicleRepository.addVehicleList(DatabaseGenerator.generateVehicles(numberOfRecords));
-            priceRecordRepository.addPriceRecordList(DatabaseGenerator.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
+            vehicleRepository.addVehicleList(My_EntityClasses.ModelWorld.generateVehicles(numberOfRecords));
+            priceRecordRepository.addPriceRecordList(My_EntityClasses.ModelWorld.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
 
             Assert.AreEqual(numberOfRecords, vehicleRepository.getAllEntries().Count, "Not all vehicle entries were inserted in the database successfully");
             Assert.AreEqual(numberOfRecords, priceRecordRepository.getAllEntries().Count, "Not all priceRecord entries were inserted in the database successfully");
@@ -36,8 +50,8 @@ namespace Tutorial.Tests.ModelWorld
         {
             int numberOfRecords = 10000;
             int priceBandsPerPriceRecord = 5;
-            vehicleRepository.addVehicleList(DatabaseGenerator.generateVehicles(numberOfRecords));
-            priceRecordRepository.addPriceRecordList(DatabaseGenerator.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
+            vehicleRepository.addVehicleList(My_EntityClasses.ModelWorld.generateVehicles(numberOfRecords));
+            priceRecordRepository.addPriceRecordList(My_EntityClasses.ModelWorld.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
 
             Assert.AreEqual(numberOfRecords, vehicleRepository.getAllEntries().Count, "Not all vehicle entries were inserted in the database successfully");
             Assert.AreEqual(numberOfRecords, priceRecordRepository.getAllEntries().Count, "Not all priceRecord entries were inserted in the database successfully");
@@ -48,8 +62,8 @@ namespace Tutorial.Tests.ModelWorld
         {
             int numberOfRecords = 100000;
             int priceBandsPerPriceRecord = 10;
-            vehicleRepository.addVehicleList(DatabaseGenerator.generateVehicles(numberOfRecords));
-            priceRecordRepository.addPriceRecordList(DatabaseGenerator.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
+            vehicleRepository.addVehicleList(My_EntityClasses.ModelWorld.generateVehicles(numberOfRecords));
+            priceRecordRepository.addPriceRecordList(My_EntityClasses.ModelWorld.generatePriceRecords(numberOfRecords, priceBandsPerPriceRecord));
 
             Assert.AreEqual(numberOfRecords, vehicleRepository.getAllEntries().Count, "Not all vehicle entries were inserted in the database successfully");
             Assert.AreEqual(numberOfRecords, priceRecordRepository.getAllEntries().Count, "Not all priceRecord entries were inserted in the database successfully");

@@ -268,7 +268,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="My_EntityClasses\DatabaseGenerator.cs" />
+    <Compile Include="Models\VehicleList.cs" />
+    <Compile Include="My_EntityClasses\ModelWorld.cs" />
     <Compile Include="My_EntityClasses\IDao.cs" />
     <Compile Include="My_EntityClasses\IRepository.cs" />
     <Compile Include="My_EntityClasses\MyApplicationDBContext.cs" />
@@ -361,6 +362,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Valuation.cshtml" />
+    <Content Include="Views\Home\VehiclesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
