@@ -5,8 +5,7 @@
 
 <h2>Available Vehicles</h2>
 <div>
-@if (ViewData["vehicles"] != null)
-{
+
     <table class="table">
         <thead>
             <tr>
@@ -35,11 +34,15 @@
    
     </tbody>
     </table>
-    }
+    
     <form method="post">
         @ViewBag.Message
-        <input type="number" min="0" name="vehicleId">
-        <br>
+        <select type="number" name="vehicleId">
+            @foreach (var vehicle in ViewData["vehicles"] as List<Tutorial.MyClasses.Vehicle>)
+            {
+                <option value=@vehicle.id>@vehicle.make @vehicle.model @vehicle.lookupCode</option>
+            }
+        </select>
         <input type="submit" value="Submit">
     </form> 
 </div>

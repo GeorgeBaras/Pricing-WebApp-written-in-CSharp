@@ -15,6 +15,7 @@ namespace Tutorial.Controllers
     {
         static IUnityContainer myContainer = UnityContainerSingleton.getContainer();
         static VehicleRepository vehicleRepository = (VehicleRepository)myContainer.Resolve<IRepository>("vehicleRepository");
+        static PriceRecordRepository priceRecordRepository = (PriceRecordRepository)myContainer.Resolve<IRepository>("priceRecordRepository");
         static appDBContext db = (appDBContext)myContainer.Resolve<DbContext>("applicationDBContext");
 
         public ActionResult Index()
@@ -27,8 +28,13 @@ namespace Tutorial.Controllers
         public ActionResult Valuation()
         {
             var vehicles = vehicleRepository.getAllEntries();
-
-            ViewData["vehicles"] = vehicles;
+            if (vehicles.Count != 0)
+            {
+                ViewData["vehicles"] = vehicles;
+            }
+            else {
+                ViewData["vehicles"] = new List<Vehicle>();
+            }
             ViewBag.Title = "Pick your vehicle's id ";
             ViewBag.Message = "Pick your vehicle's id ";
             return View();
@@ -37,17 +43,26 @@ namespace Tutorial.Controllers
         [HttpPost]
         public ActionResult Valuation(int vehicleId)
         {
+            int vehicleSerial = vehicleId - 1;
             var vehicles = vehicleRepository.getAllEntries();
-            if (vehicleId > vehicles.Count || vehicleId < 1) {
-                ViewBag.Message = "Your input was invalid,try again ";
-                return View();
+            ViewBag.Title = "PriceBands for " + vehicles[vehicleSerial].make + " " + vehicles[vehicleSerial].model;
+            PriceRecord priceRecord = priceRecordRepository.getPriceRecordByLookupCode(vehicles[vehicleSerial].lookupCode);
+            if (priceRecord != null)
+            {
+                return View("VehicleDetailsView", priceRecord);
             }
+            return View();
 
-
-            ViewBag.Title = "PriceBands for "+ vehicles[vehicleId].make +" "+ vehicles[vehicleId].model;
-
-            return View("VehiclesView",vehicles[vehicleId]);
         }
-        
+
+        public ActionResult ValueRecalculation(string lookupCode) {
+            Vehicle vehicle = vehicleRepository.getVehicleByLookupCode(lookupCode);
+            CAPValuationCalculator calculator = new CAPValuationCalculator();
+            vehicle.value = calculator.calculate(priceRecordRepository.getPriceRecordByLookupCode(lookupCode), vehicle.mileage);
+            return View("ValueRecalculation", vehicle);
+        }
+
+
+
     }
 }

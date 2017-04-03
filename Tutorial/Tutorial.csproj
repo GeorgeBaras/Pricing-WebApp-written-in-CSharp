@@ -363,7 +363,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Valuation.cshtml" />
-    <Content Include="Views\Home\VehiclesView.cshtml" />
+    <Content Include="Views\Home\VehicleDetailsView.cshtml" />
+    <Content Include="Views\Home\ValueRecalculation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

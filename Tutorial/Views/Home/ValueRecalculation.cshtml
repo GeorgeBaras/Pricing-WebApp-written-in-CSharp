@@ -1,0 +1,12 @@
+﻿@model Tutorial.MyClasses.Vehicle
+
+@{
+    ViewBag.Title = "ValueRecalculation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ValueRecalculation</h2>
+<div>Your new value is: @Model.value</div>
+<p>
+    @Html.ActionLink("Back to List", "Valuation")
+</p>
