@@ -7,27 +7,38 @@ using System.Web;
 using System.Web.Mvc;
 using Tutorial.EF_DBContext;
 using Tutorial.EF_DBContext_Repositories;
+using Tutorial.Models;
+using Tutorial.My_EntityClasses;
 using Tutorial.MyClasses;
 
 namespace Tutorial.Controllers
 {
     public class HomeController : Controller
     {
-        static IUnityContainer myContainer = UnityContainerSingleton.getContainer();
-        static VehicleRepository vehicleRepository = (VehicleRepository)myContainer.Resolve<IRepository>("vehicleRepository");
-        static PriceRecordRepository priceRecordRepository = (PriceRecordRepository)myContainer.Resolve<IRepository>("priceRecordRepository");
-        static appDBContext db = (appDBContext)myContainer.Resolve<DbContext>("applicationDBContext");
-
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            List<String> lookupCodes = new List<String>();
+            foreach (Vehicle vehicle in MasterRepository.vehicleRepository.getAllEntries())
+            {
+                lookupCodes.Add(vehicle.lookupCode);
+            }
+            LookUpCodesViewModel viewModel = new LookUpCodesViewModel(lookupCodes);
+            return View(viewModel);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Index(String lookUpCode)
+        {
+            Vehicle vehicle = MasterRepository.vehicleRepository.getVehicleByLookupCode(lookUpCode);
+            if (vehicle == null) {
+                return View("Error");
+            }
+            return View("ValueRecalculation",vehicle);
         }
 
         public ActionResult Valuation()
         {
-            var vehicles = vehicleRepository.getAllEntries();
+            var vehicles = MasterRepository.vehicleRepository.getAllEntries();
             if (vehicles.Count != 0)
             {
                 ViewData["vehicles"] = vehicles;
@@ -44,9 +55,9 @@ namespace Tutorial.Controllers
         public ActionResult Valuation(int vehicleId)
         {
             int vehicleSerial = vehicleId - 1;
-            var vehicles = vehicleRepository.getAllEntries();
+            var vehicles = MasterRepository.vehicleRepository.getAllEntries();
             ViewBag.Title = "PriceBands for " + vehicles[vehicleSerial].make + " " + vehicles[vehicleSerial].model;
-            PriceRecord priceRecord = priceRecordRepository.getPriceRecordByLookupCode(vehicles[vehicleSerial].lookupCode);
+            PriceRecord priceRecord = MasterRepository.priceRecordRepository.getPriceRecordByLookupCode(vehicles[vehicleSerial].lookupCode);
             if (priceRecord != null)
             {
                 return View("VehicleDetailsView", priceRecord);
@@ -56,13 +67,28 @@ namespace Tutorial.Controllers
         }
 
         public ActionResult ValueRecalculation(string lookupCode) {
-            Vehicle vehicle = vehicleRepository.getVehicleByLookupCode(lookupCode);
+            Vehicle vehicle = MasterRepository.vehicleRepository.getVehicleByLookupCode(lookupCode);
             CAPValuationCalculator calculator = new CAPValuationCalculator();
-            vehicle.value = calculator.calculate(priceRecordRepository.getPriceRecordByLookupCode(lookupCode), vehicle.mileage);
+            vehicle.value = calculator.calculate(MasterRepository.priceRecordRepository.getPriceRecordByLookupCode(lookupCode), vehicle.mileage);
+            if (vehicle == null)
+            {
+                return View("Error");
+            }
             return View("ValueRecalculation", vehicle);
         }
 
-
+        public ActionResult HomeSearch() {
+            List<String> lookupCodes = new List<String>();
+            foreach (Vehicle vehicle in MasterRepository.vehicleRepository.getAllEntries()) {
+                lookupCodes.Add(vehicle.lookupCode);
+            }
+            LookUpCodesViewModel viewModel = new LookUpCodesViewModel(lookupCodes);
+            if (viewModel == null)
+            {
+                return View("Error");
+            }
+            return View(lookupCodes);
+        }
 
     }
 }

@@ -267,8 +267,12 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PriceRecordsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Models\LookUpCodesViewModel.cs" />
+    <Compile Include="Models\PriceRecordList.cs" />
     <Compile Include="Models\VehicleList.cs" />
+    <Compile Include="My_EntityClasses\MasterRepository.cs" />
     <Compile Include="My_EntityClasses\ModelWorld.cs" />
     <Compile Include="My_EntityClasses\IDao.cs" />
     <Compile Include="My_EntityClasses\IRepository.cs" />
@@ -308,6 +312,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MyCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -337,6 +342,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\MyJavaScript.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -365,6 +371,8 @@
     <Content Include="Views\Home\Valuation.cshtml" />
     <Content Include="Views\Home\VehicleDetailsView.cshtml" />
     <Content Include="Views\Home\ValueRecalculation.cshtml" />
+    <Content Include="Views\PriceRecords\PriceRecordsIndex.cshtml" />
+    <Content Include="Views\PriceRecords\EditPriceRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

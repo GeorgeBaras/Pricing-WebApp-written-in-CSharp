@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/MyCSS.css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -21,6 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Valuation", "Valuation", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("PriceRecords", "PriceRecordsIndex", "PriceRecords", new { area = "" }, null)</li>
+
                     <!-- <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li> -->
                 </ul>
             </div>
@@ -33,7 +36,8 @@
             <p>&copy; @DateTime.Now.Year - George Baras</p>
         </footer>
     </div>
-
+    
+    @Scripts.Render("~/Scripts/MyJavaScript.js")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

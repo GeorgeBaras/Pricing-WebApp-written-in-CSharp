@@ -1,6 +1,31 @@
-﻿<div class="jumbotron">
+﻿@model Tutorial.Models.LookUpCodesViewModel
+
+@{
+    ViewBag.Title = "HomeSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
     <h1>Search</h1>
     <p class="lead">If you already know your lookupCode search for your vehicle using the form below.<br />
-    Or just go to the @Html.ActionLink("valuation","Valuation") page to get started.</p>
+    Or just go to the @Html.ActionLink("valuation", "Valuation") page to get started.</p>
+
+
+    <datalist id="lookupCodes">
+       @{foreach (var lookupCode in Model.LookupCodes)
+           {
+            <option value=@lookupCode />
+           }
+        }
+    </datalist>
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <input type="text" list="lookupCodes" name="lookUpCode">
+        <input type="submit"  value="Quick Re-evaluation" />
+    }
 </div>
+
+
+
 

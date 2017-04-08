@@ -1,0 +1,34 @@
+﻿@model Tutorial.Models.PriceRecordList
+
+@{
+    ViewBag.Title = "PriceRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PriceRecords</h2>
+<p>@Html.ActionLink("Add new price record", "AddPriceRecord")</p>
+@foreach (var priceRecord in Model.priceRecordlist)
+{
+    <button class="accordion">@priceRecord.LookupCode</button>
+    <div class="panel">
+        <h4>Id | Mileage | Valuation </h4>
+        <ul>
+            @foreach (var priceBand in @priceRecord.PriceBands)
+            {
+                <li>@priceBand.PriceBandId | @priceBand.Mileage | @priceBand.Valuation</li>
+            }
+        </ul>
+        @using (Html.BeginForm("EditPriceRecord", "PriceRecords", FormMethod.Post))
+                {
+            <input type="hidden" name="lookupCode" value=@priceRecord.LookupCode />
+                <input type="submit" value="EditPriceRecord" />
+        }
+    </div>
+
+}
+<br><br><br>
+<p>
+    @Html.ActionLink("Back to Home", "Index")
+</p>
+
+

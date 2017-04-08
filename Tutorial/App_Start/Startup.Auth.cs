@@ -26,9 +26,10 @@ namespace Tutorial
             //*** Create the test DB if !exists
             if (!ModelWorld.db.Database.Exists())
             {
-                ModelWorld.GenerateSmallDB();
-            }
 
+            }
+            ModelWorld.db.Database.Delete();
+            ModelWorld.GenerateSmallDB();
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
