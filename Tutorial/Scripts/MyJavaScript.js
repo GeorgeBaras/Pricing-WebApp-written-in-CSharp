@@ -14,3 +14,11 @@ for (i = 0; i < acc.length; i++) {
     }
 }
 
+function validateSaveEditedPRForm() {
+    var x = document.getElementById("LookupCode").innerHTML;
+    // alert("LookupCodes are not supposed to contain spaces..."+x);
+    if (x.contains(" ")) {
+        alert("LookupCodes are not supposed to contain spaces, please retry...");
+        return false;
+    }
+}

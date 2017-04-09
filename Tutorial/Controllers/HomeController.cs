@@ -29,11 +29,11 @@ namespace Tutorial.Controllers
         [HttpPost]
         public ActionResult Index(String lookUpCode)
         {
-            Vehicle vehicle = MasterRepository.vehicleRepository.getVehicleByLookupCode(lookUpCode);
-            if (vehicle == null) {
+            Vehicle vehicle = RecalculateVehicleValue(lookUpCode); if (vehicle == null)
+            {
                 return View("Error");
             }
-            return View("ValueRecalculation",vehicle);
+            return View("ValueRecalculation", vehicle);
         }
 
         public ActionResult Valuation()
@@ -66,15 +66,24 @@ namespace Tutorial.Controllers
 
         }
 
-        public ActionResult ValueRecalculation(string lookupCode) {
-            Vehicle vehicle = MasterRepository.vehicleRepository.getVehicleByLookupCode(lookupCode);
-            CAPValuationCalculator calculator = new CAPValuationCalculator();
-            vehicle.value = calculator.calculate(MasterRepository.priceRecordRepository.getPriceRecordByLookupCode(lookupCode), vehicle.mileage);
-            if (vehicle == null)
+        public ActionResult ValueRecalculation(string lookupCode)
+        {
+            Vehicle vehicle = RecalculateVehicleValue(lookupCode); if (vehicle == null)
             {
                 return View("Error");
             }
             return View("ValueRecalculation", vehicle);
+        }
+
+        private static Vehicle RecalculateVehicleValue(string lookupCode)
+        {
+            Vehicle vehicle = MasterRepository.vehicleRepository.getVehicleByLookupCode(lookupCode);
+            CAPValuationCalculator calculator = new CAPValuationCalculator();
+            if (vehicle != null)
+            {
+                vehicle.value = calculator.calculate(MasterRepository.priceRecordRepository.getPriceRecordByLookupCode(lookupCode), vehicle.mileage);
+            }
+            return vehicle;
         }
 
         public ActionResult HomeSearch() {

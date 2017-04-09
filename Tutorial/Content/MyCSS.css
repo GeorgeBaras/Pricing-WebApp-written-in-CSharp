@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url("../Content/ee1f.PNG");
+    background-image: url("../Content/greyBackground.PNG");
     background-size: cover;
     /*background-repeat: no-repeat;
     background-position: center center; *** */
@@ -28,3 +28,4 @@ div.panel {
     display: none;
     background-color: white;
 }
+

@@ -15,20 +15,39 @@ namespace Tutorial.Controllers
     {
 
         // GET: PriceBands
-        public ActionResult PriceRecordsIndex()
+        public ActionResult PriceRecordsIndex(int page=1)
         {
-            PriceRecordList priceRecordList = new PriceRecordList();
-            priceRecordList.priceRecordlist = MasterRepository.priceRecordRepository.getAllEntries();
-            if (priceRecordList.priceRecordlist.Count < 1) {
+            int pageSize;
+            PriceRecordList priceRecordList;
+            List<PriceRecord> allRecords;
+            getPaginatedPriceRecordList(page, out pageSize, out priceRecordList, out allRecords);
+
+            if (priceRecordList.priceRecordlist.Count < 1)
+            {
                 return View("Error");
             }
+            ViewData["pages"] = Math.Ceiling((double)allRecords.Count / pageSize);
             return View(priceRecordList);
         }
 
-        [HttpPost]
-        public ActionResult AddPriceRecord(string lookupCode) {
-            return View();
+        private static void getPaginatedPriceRecordList(int page, out int pageSize, out PriceRecordList priceRecordList, out List<PriceRecord> allRecords)
+        {
+            pageSize = 4;
+            priceRecordList = new PriceRecordList();
+            allRecords = MasterRepository.priceRecordRepository.getAllEntries();
+            // Get only the priceRecords for the specific page
+
+            for (int i = (page - 1) * pageSize; i <= (page * pageSize) - 1; i++)
+            {
+                if (i > allRecords.Count - 1)
+                {
+                    break;
+                }
+                priceRecordList.priceRecordlist.Add(allRecords[i]);
+            }
         }
+
+        
 
         [HttpPost]
         public ActionResult EditPriceRecord(string lookupCode)
@@ -48,57 +67,78 @@ namespace Tutorial.Controllers
             String updatedLookupCode = Request.Form["LookupCode"];
             PriceRecord priceRecord = MasterRepository.priceRecordRepository.getPriceRecordByLookupCode(oldLookupCode);
             MasterRepository.priceRecordRepository.updateLookupCode(oldLookupCode, updatedLookupCode);
-            MasterRepository.vehicleRepository.updateFieldBylookupCode(oldLookupCode, VehicleDAO.VehicleFields.lookupCode, updatedLookupCode);
-            if (priceRecord == null)
+
+            if (lookupCodeExistInVehicles(oldLookupCode))
             {
-                return View("Error");
+                MasterRepository.vehicleRepository.updateFieldBylookupCode(oldLookupCode, VehicleDAO.VehicleFields.lookupCode, updatedLookupCode);
             }
-            PriceRecordList priceRecordList = new PriceRecordList();
-            priceRecordList.priceRecordlist = MasterRepository.priceRecordRepository.getAllEntries();
+
+
+            //if (priceRecord == null)
+            //{
+            //    return View("Error");
+            //}
+            //PriceRecordList priceRecordList = new PriceRecordList();
+            //priceRecordList.priceRecordlist = MasterRepository.priceRecordRepository.getAllEntries();
+            //if (priceRecordList.priceRecordlist.Count < 1)
+            //{
+            //    return View("Error");
+            //}
+            //return View("PriceRecordsIndex", priceRecordList);
+
+
+            int pageSize;
+            PriceRecordList priceRecordList;
+            List<PriceRecord> allRecords;
+            getPaginatedPriceRecordList(1, out pageSize, out priceRecordList, out allRecords);
+
             if (priceRecordList.priceRecordlist.Count < 1)
             {
                 return View("Error");
             }
+            ViewData["pages"] = Math.Ceiling((double)allRecords.Count / pageSize);
             return View("PriceRecordsIndex", priceRecordList);
         }
 
 
-        // POST: PriceBands/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PriceBands/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult AddPriceRecord()
         {
             return View();
         }
 
-        // POST: PriceBands/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult AddPriceRecord(FormCollection form)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string priceRecordName = Request.Form["PriceRecordName"];
+            string pb1mileage = Request.Form["pb1mileage"];
+            string pb1valuation = Request.Form["pb1valuation"];
+            string pb2mileage = Request.Form["pb2mileage"];
+            string pb2valuation = Request.Form["pb2valuation"];
 
-                return RedirectToAction("Index");
+            PriceBand priceBand1 = new PriceBand(Convert.ToInt16(pb1mileage), Convert.ToDecimal(pb1valuation));
+            PriceBand priceBand2 = new PriceBand(Convert.ToInt16(pb2mileage), Convert.ToDecimal(pb2valuation));
+
+            PriceRecord priceRecord = new PriceRecord(priceRecordName, priceBand1);
+            priceRecord.PriceBands.Add(priceBand2);
+            int entriesBeforeAddition = MasterRepository.priceRecordRepository.getAllEntries().Count;
+            MasterRepository.priceRecordRepository.addPriceRecord(priceRecord);
+
+            if (entriesBeforeAddition >= MasterRepository.priceRecordRepository.getAllEntries().Count) {
+                return View("Error");
             }
-            catch
-            {
-                return View();
-            }
+            return View("RecordAdded");
         }
+
+        private bool lookupCodeExistInVehicles(string lookupCode) {
+            VehicleList vehicleList = new VehicleList(MasterRepository.vehicleRepository.getAllEntries());
+            foreach (var vehicle in vehicleList.vehicleList)
+            {
+                if (vehicle.lookupCode.Equals(lookupCode)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

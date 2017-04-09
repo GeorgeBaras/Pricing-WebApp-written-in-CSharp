@@ -26,9 +26,18 @@
     </div>
 
 }
+<div id="priceRecordPagination" >
+    <text> page </text>
+    @{ int pages = Convert.ToInt32(ViewData["pages"]);
+        for (int i = 1; i <= pages; i++)
+        {
+            @Html.ActionLink(@i.ToString(), "PriceRecordsIndex", new { @page = @i }, htmlAttributes: new {  })<text> | </text>
+        }
+    }
+</div>
 <br><br><br>
 <p>
-    @Html.ActionLink("Back to Home", "Index")
+    @Html.ActionLink("Back to Home", "Index", "Home")
 </p>
 
 

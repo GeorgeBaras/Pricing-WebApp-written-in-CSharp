@@ -9,5 +9,8 @@ namespace Tutorial.Models
     public class PriceRecordList
     {
         public List<PriceRecord> priceRecordlist { get; set; }
+        public PriceRecordList() {
+            this.priceRecordlist = new List<PriceRecord>();
+        }
     }
 }

@@ -373,6 +373,8 @@
     <Content Include="Views\Home\ValueRecalculation.cshtml" />
     <Content Include="Views\PriceRecords\PriceRecordsIndex.cshtml" />
     <Content Include="Views\PriceRecords\EditPriceRecord.cshtml" />
+    <Content Include="Views\PriceRecords\AddPriceRecord.cshtml" />
+    <Content Include="Views\PriceRecords\RecordAdded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

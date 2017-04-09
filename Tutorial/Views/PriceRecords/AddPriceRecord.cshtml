@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "AddPriceRecord";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddPriceRecord</h2>
+
+@using (Html.BeginForm("AddPriceRecord", "PriceRecords", FormMethod.Post, new { onsubmit = "return validateAddPriceRecordForm()" }))
+{
+    <br /><br />
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Name</label> 
+        <div class="col-md-10">
+            <input type="text" name="PriceRecordName" class = "form-control" required = "required"/>
+             
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        <label for="PriceBand1Mileage" class="control-label col-md-2">Add your first priceBand's mileage:</label>
+        <div class="col-md-10">
+            <input type="number" name="pb1mileage" class="form-control" required="required" />
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        <label for="PriceBand1Valuation" class="control-label col-md-2">Add your first priceBand's valuation:</label>
+        <div class="col-md-10">
+            <input type="number" name="pb1valuation" class="form-control" required="required" />
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        <label for="PriceBand2Mileage" class="control-label col-md-2">Add your second priceBand's mileage:</label>
+        <div class="col-md-10">
+            <input type="number" name="pb2mileage" class="form-control" required="required" />
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        <label for="PriceBand2Valuation" class="control-label col-md-2">Add your second priceBand's valuation:</label>
+        <div class="col-md-10">
+            <input type="number" name="pb2valuation" class="form-control" required="required" />
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Save" class="btn btn-default" size="15"/>
+    </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to PriceRecords", "PriceRecordsIndex", new { @page = 1 }, htmlAttributes: new { })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
