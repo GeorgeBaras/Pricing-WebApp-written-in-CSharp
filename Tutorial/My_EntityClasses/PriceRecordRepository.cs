@@ -61,5 +61,9 @@ namespace Tutorial.EF_DBContext_Repositories
         {
             return priceRecordDAO.deleteAllEntries();
         }
+
+        public int getCount() {
+            return priceRecordDAO.getCount();
+        }
     }
 }

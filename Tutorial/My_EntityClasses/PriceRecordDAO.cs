@@ -64,6 +64,11 @@ namespace Tutorial.EF_DBContext_Repositories
             return deleted == 1;
         }
 
+        internal int getCount()
+        {
+            return (from p in db.PriceRecords
+                    select p).Count();
+        }
 
         public Boolean updateLookupCode(string lookupCode, string newLookupCode) {
             PriceRecord priceRecord = getPriceRecordByLookupCode(lookupCode);

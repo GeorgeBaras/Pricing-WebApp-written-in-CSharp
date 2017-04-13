@@ -69,6 +69,12 @@ namespace Tutorial.EF_DBContext_Repositories
             return deleted;
         }
 
+        public int getCount()
+        {
+            return (from v in db.Vehicles
+                         select v).Count();
+        }
+
         public bool updateFieldBylookupCode<T>(string lookupCode, VehicleFields field, T updatedFieldValue)
         {
             Vehicle vehicle = (from v in db.Vehicles

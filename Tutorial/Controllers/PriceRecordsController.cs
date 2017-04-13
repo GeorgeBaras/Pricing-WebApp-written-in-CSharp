@@ -120,10 +120,10 @@ namespace Tutorial.Controllers
 
             PriceRecord priceRecord = new PriceRecord(priceRecordName, priceBand1);
             priceRecord.PriceBands.Add(priceBand2);
-            int entriesBeforeAddition = MasterRepository.priceRecordRepository.getAllEntries().Count;
+            int entriesBeforeAddition = MasterRepository.priceRecordRepository.getCount(); 
             MasterRepository.priceRecordRepository.addPriceRecord(priceRecord);
 
-            if (entriesBeforeAddition >= MasterRepository.priceRecordRepository.getAllEntries().Count) {
+            if (entriesBeforeAddition >= MasterRepository.priceRecordRepository.getCount()) {
                 return View("Error");
             }
             return View("RecordAdded");

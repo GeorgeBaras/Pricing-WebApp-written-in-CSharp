@@ -56,5 +56,9 @@ namespace Tutorial.EF_DBContext_Repositories
             return vehicleDAO.dbIsEmpty();
         }
 
+        public int getCount() {
+            return vehicleDAO.getCount();
+        }
+
     }
 }

@@ -9,7 +9,7 @@ namespace Tutorial.EF_DBContext
 {
     public class appDBContext : DbContext
     {
-        public appDBContext(): base()
+        public appDBContext(): base("sqlExpressConnection")
         {
 
         }
