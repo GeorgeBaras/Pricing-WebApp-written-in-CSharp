@@ -29,3 +29,6 @@ div.panel {
     background-color: white;
 }
 
+#map {
+    height: 50%;
+}
